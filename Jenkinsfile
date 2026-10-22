@@ -11,7 +11,7 @@ pipeline {
     stage('Integration') { steps { bat 'echo Integration tests' } }
   }
 }
-      stage('Package') { steps { bat 'package.bat' } }
+    stage('Package') { steps { bat 'package.bat' } }
 
   }
   post {

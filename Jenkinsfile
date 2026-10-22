@@ -1,13 +1,13 @@
 pipeline {
   agent any
-  environment { APP_NAME = 'test'}
   stages {
     stage('Checkout') { steps { checkout scm } }
-    stage('Build') { steps { bat 'echo Building'} }
-    stage('Test') { steps { bat 'echo Running tests'} }
+    stage('Build') { steps { bat 'build.bat'} }
+    stage('Test') { steps { bat 'test.bat'} }
+    stage('Package') { steps { bat 'package.bat'} }
   }
   post {
-    success { echo 'All stages passed' }
-    failure { echo 'Something failed' }
+    success { archiveartifacts artifacts 'dist/**',fingerprint: true }
+    failure { echo 'CI pipeline failed' }
   }
 }
